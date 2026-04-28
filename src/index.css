@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-ivannuri-deep: #02040a;
+  --color-ivannuri-accent: #00f2ff;
+  --color-ivannuri-neurogolf: #00ff80;
+  --color-ivannuri-absolute: #ff0070;
+  --color-ivannuri-sub-accent: #7000ff;
+  --color-ivannuri-border: #161b22;
+  --color-ivannuri-glow: rgba(0, 242, 255, 0.15);
+}
+
+@layer base {
+  body {
+    @apply bg-ivannuri-deep text-slate-100 font-sans antialiased overflow-x-hidden;
+    background-image: 
+      radial-gradient(circle at 0% 0%, rgba(112, 0, 255, 0.05) 0%, transparent 40%),
+      radial-gradient(circle at 100% 100%, rgba(0, 242, 255, 0.05) 0%, transparent 40%),
+      linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  }
+}
+
+.quantum-card {
+  @apply bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-6 relative overflow-hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.quantum-card::before {
+  content: "";
+  @apply absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-ivannuri-accent to-transparent opacity-30;
+}
+
+.arc-grid-cell {
+  @apply aspect-square border-[0.5px] border-white/5 transition-all duration-500 relative;
+}
+
+.arc-grid-cell:hover {
+  @apply scale-110 z-10 shadow-[0_0_10px_currentColor];
+}
+
+.glow-text {
+  text-shadow: 0 0 10px var(--color-ivannuri-glow);
+}
+
+.scan-line {
+  @apply absolute left-0 w-full h-[2px] bg-ivannuri-accent/50 z-20 pointer-events-none;
+  animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+  from { top: 0%; }
+  to { top: 100%; }
+}
+
+.terminal-log {
+  @apply font-mono text-[10px] leading-relaxed text-slate-400 h-40 overflow-y-auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 242, 255, 0.2) transparent;
+}
+
+.terminal-log::-webkit-scrollbar {
+  width: 4px;
+}
+.terminal-log::-webkit-scrollbar-thumb {
+  @apply bg-ivannuri-accent/20 rounded-full;
+}
